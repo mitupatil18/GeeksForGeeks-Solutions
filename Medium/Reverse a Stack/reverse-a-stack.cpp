@@ -10,19 +10,15 @@ using namespace std;
 
 class Solution{
 public:
+    queue<int>s;
      void Reverse(stack<int> &St){
-        vector<int>s;
-        while(!St.empty()){
-            int x=St.top();
-            s.push_back(x);
-            St.pop();
-        }
-         for(int i=0;i<s.size();i++){
-            int x=s[i];
-            St.push(x);
-        
-        }
-        
+        if(St.empty())
+        return ;
+        s.push(St.top());
+        St.pop();
+        Reverse(St);
+        St.push(s.front());
+        s.pop();
     }
 };
 
