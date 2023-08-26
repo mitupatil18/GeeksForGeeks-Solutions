@@ -10,32 +10,25 @@ using namespace std;
 
 class Solution{
   public:
-    int lcs(string a, string b, int n)
-    {
-        vector<vector<int>> v(n + 1, vector<int> (n + 1, 0));
-        for(int i = 1; i <= n; i++)
+    int longestPalinSubseq(string a) {
+        string b = a ;
+        reverse(b.begin(),b.end());
+        int n = a.size() ;
+        int dp[n+1][n+1] , i , j ;
+        memset(dp,0,sizeof(dp));
+        for(i = 0 ; i<=n ; i++)
         {
-            for(int j = 1; j <= n; j++)
+            for(j = 0 ; j<=n ; j++)
             {
-                if(a[i - 1] == b[j - 1])
-                {
-                    v[i][j] = 1 + v[i - 1][j - 1];
-                }
+                if(i==0 || j==0)
+                dp[i][j] = 0;
+                else if(a[i-1]!=b[j-1])
+                dp[i][j] = max(dp[i-1][j],dp[i][j-1]);
                 else
-                {
-                    v[i][j] = max(v[i - 1][j], v[i][j - 1]);
-                }
+                dp[i][j] = dp[i-1][j-1]+1 ;
             }
         }
-        return v[n][n];
-    }
-    int longestPalinSubseq(string A) {
-        //code here
-        string s = A;
-        int n = s.size();
-        reverse(s.begin(), s.end());
-        int x = lcs(A, s, n);
-        return x;
+        return dp[n][n];
     }
 };
 
