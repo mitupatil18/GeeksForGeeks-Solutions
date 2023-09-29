@@ -16,7 +16,6 @@ int main()
 // Contributed By: Pranay Bansal
 // } Driver Code Ends
 
-
 int countRev (string s)
 {
     if(s.size()%2==1)
