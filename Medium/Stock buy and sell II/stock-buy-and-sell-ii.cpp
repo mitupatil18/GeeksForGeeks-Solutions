@@ -31,16 +31,17 @@ public:
 
 class Solution {
   public:
-    int stockBuyAndSell(int n, vector<int> &prices) {
-        int ans = 0 , i ;
-        for(i = 0 ; i<n-1 ; i++)
+    int stockBuyAndSell(int n, vector<int> &p) {
+        int i = 0 ;
+        int count = 0 ;
+        for( ; i<n-1 ; i++)
         {
-            if(prices[i]<prices[i+1])
-            {
-                ans += prices[i+1]-prices[i] ;
-            }
+            int x = 0 ;
+            if(p[i]<p[i+1])
+            x = p[i+1]-p[i] ;
+            count += x ;
         }
-        return ans ;
+        return count ;
     }
 };
 
