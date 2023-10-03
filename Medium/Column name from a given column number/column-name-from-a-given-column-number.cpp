@@ -9,16 +9,17 @@ class Solution{
     public:
     string colName (long long int n)
     {
-         string s = "" ;
-         long long int t = n ;
-         while(t>0)
-         {
-             int r = (t-1)%26;
-             char l = 'A'+r ;
+        long long int t = n ;
+        string s = "" ;
+        while(t>0)
+        {
+            int r = (t-1)%26;
+            char l = 'A'+r ;
              s = l+s ;
              t = (t-1)/26 ;
-         }
-         return s;
+            
+        }
+        return s ;
     }
 };
 
