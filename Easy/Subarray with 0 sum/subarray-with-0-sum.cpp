@@ -13,22 +13,8 @@ class Solution{
     //Function to check whether there is a subarray present with 0-sum or not.
     bool subArrayExists(int arr[], int n)
     {
-        int sum=0;
-        map<int, int> m;
-        for(int i=0;i< n;i++)
-        {
-            sum = sum+arr[i];
-            m[sum] ++;
-            if(sum==0)
-            return true;
-        }
-        for(auto x: m)
-        {
-            if(x.second>1)
-            return true;
-           
-        }
-        return false ;
+        set<int> s;
+        for
     }
 };
 
