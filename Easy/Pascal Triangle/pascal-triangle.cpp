@@ -1,21 +1,19 @@
 //{ Driver Code Starts
 #include <bits/stdc++.h>
-
 using namespace std;
-#define ll long long
 
 // } Driver Code Ends
-// #define ll long long
+// #define long long long long
 class Solution{
 public:
     int MOD = 1e9+7;
-    vector<ll> nthRowOfPascalTriangle(int n) {
-        ll i , j;
-        vector<vector<ll>> ans ;
+    vector<long long> nthRowOfPascalTriangle(int n) {
+        long long i , j;
+        vector<vector<long long>> ans ;
         ans.push_back({1});
         for(i = 1 ; i<n ; i++)
         {
-            vector<ll> v ;
+            vector<long long> v ;
             v.push_back(1);
             for(j = 1 ; j<i ; j++)
             {
@@ -29,10 +27,11 @@ public:
 };
 
 
+
 //{ Driver Code Starts.
 
 
-void printAns(vector<ll> &ans) {
+void printAns(vector<long long> &ans) {
     for (auto &x : ans) {
         cout << x << " ";
     }
