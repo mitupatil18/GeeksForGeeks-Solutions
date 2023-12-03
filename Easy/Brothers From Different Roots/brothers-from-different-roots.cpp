@@ -103,10 +103,11 @@ class Solution
 public:
     void find(Node *a , vector<int>& v)
     {
-        if(a==NULL) return ;
-        find(a->left, v);
+        if(a==NULL)
+        return ;
+        find(a->left,v);
         v.push_back(a->data);
-        find(a->right, v);
+        find(a->right,v);
     }
     int countPairs(Node* root1, Node* root2, int x)
     {
@@ -116,20 +117,21 @@ public:
         int cnt = 0 ;
         for(int i = 0 ; i<a.size() ; i++)
         {
-            int l = 0 , r = b.size()-1 , m , t = x-a[i];
+            int l = 0 , r = b.size()-1 , t = x-a[i];
             while(l<=r)
             {
-                m = (l+r)/2 ;
-                if(b[m]==t) break;
-                if(b[m]<t) 
-                l = m+1 ;
-                else
+                int m = (l+r)/2 ;
+                if(b[m]==t)
+                break;
+                if(b[m]>t)
                 r = m-1 ;
+                else
+                l = m+1 ;
             }
             if(l<=r)
             cnt++ ;
         }
-        return cnt;
+        return cnt ;
     }
 };
 
