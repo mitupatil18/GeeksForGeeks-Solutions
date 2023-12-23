@@ -11,21 +11,23 @@ class Solution
     public:
     //Function to find all elements in array that appear more than n/k times.
     int countOccurence(int arr[], int n, int k) {
+        int c = n/k , cnt = 1 , ans = 0 ;
         sort(arr,arr+n);
-        int i = 0 , z = n/k, cnt = 1 , ans = 0  ;
-        for( ; i<n-1 ; i++)
+        for(int i = 0 ; i<n ; i++)
         {
             if(arr[i]==arr[i+1])
-            cnt++;
+            {
+                cnt++ ;
+            }
             else
             {
-                if(cnt>z)
+                if(cnt>c)
                 ans++ ;
                 cnt = 1 ;
             }
         }
-        if(cnt>z)
-            ans++ ;
+        if(cnt>c)
+        ans++ ;
         return ans ;
     }
 };
