@@ -6,30 +6,23 @@ using namespace std;
 class Solution {
   public:
     bool canPair(vector<int> nums, int k) {
-        if(nums.size()%2!=0)
-        return 0;
-        if(k==1)
-        return true;
-        int n = nums.size() , cnt = 0 ;
         vector<int> v(k,0);
+        int n = nums.size();
+        if(n%2!=0)
+        return 0 ;
         for(int i = 0 ; i<n ; i++)
+        v[nums[i]%k]++ ;
+        if(v[0]%2!=0)
+        return false;
+        for(int i = 1 ; i<k ;i++)
         {
-            v[nums[i]%k]++ ;
+            int x = k-i ;
+            if(i==x && v[i]%2!=0)
+            return 0 ;
+            else if(v[i]!=v[x])
+            return 0;
         }
-        if(v[0]%2!=0)return false;
-        for(int i = 1 ; i<k ; i++)
-        {
-                int x = k-i;
-                if(i==x && v[i]%2!=0)
-                return 0 ;
-                if(v[i]!=v[x] )
-                return 0 ;
-                else
-                cnt++ ;
-            
-        }
-        
-        return 1;
+        return 1 ;
     }
 };
 
