@@ -22,13 +22,13 @@ public:
                 cnt++;
                 i++;
             }
-            
             reverse(ans.begin()+k, ans.begin()+k+cnt);
         }
         
         return ans;
     }
 };
+
 
 
 //{ Driver Code Starts.
