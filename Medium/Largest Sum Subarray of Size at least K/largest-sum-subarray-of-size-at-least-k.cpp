@@ -4,7 +4,35 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-long long int maxSumWithK(long long int a[], long long int n, long long int k);
+// } Driver Code Ends
+class Solution{
+    public:    
+    long long int maxSumWithK(long long int a[], long long int n, long long int k) 
+    {
+        long long int sum = 0 , last = 0 ;
+        long long int ans = INT_MIN , j = 0 ;
+        for(long long int i = 0 ; i<n ;i++)
+        {
+            sum += a[i] ;
+            if(i-j+1==k)
+            ans = max(ans,sum);
+            else if(i-j+1>k)
+            {
+                last += a[j];
+                j++ ;
+                if(last<0)
+                {
+                    sum -= last;
+                    last = 0 ;
+                }
+                ans = max(ans,sum);
+            }
+        }
+        return ans ;
+    }
+};
+
+//{ Driver Code Starts.
 
 // Driver code
 int main() {
@@ -18,35 +46,10 @@ int main() {
             cin >> a[i];
         }
         cin >> k;
-        cout << maxSumWithK(a, n, k) << endl;
+        Solution ob;
+        cout << ob.maxSumWithK(a, n, k) << endl;
     }
     return 0;
 }
 
 // } Driver Code Ends
-
-
-long long int maxSumWithK(long long int a[], long long int n, long long int k) 
-{
-    long long int j = 0 , i  = 0 , sum = 0 ,last = 0 , maxSum = INT_MIN ;
-    while(j<n)
-    {
-        sum += a[j] ;
-        if(j-i+1==k)
-        maxSum = max(maxSum , sum);
-        else if(j-i+1>k)
-        {
-            maxSum = max(maxSum , sum);
-            last += a[i] ;
-            i++ ;
-            if(last<0)
-            {
-                sum -= last ;
-                maxSum = max(maxSum , sum);
-                last = 0 ;
-            }
-        }
-        j++ ;
-    }
-    return maxSum ;
-}
