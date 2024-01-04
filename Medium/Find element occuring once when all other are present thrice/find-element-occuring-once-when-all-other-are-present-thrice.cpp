@@ -10,25 +10,24 @@ using namespace std;
 
 class Solution {
   public:
-    int singleElement(int nums[] ,int N) {
-        // code here
-        if(N==1) return nums[0] ;
-        sort(nums, nums+N);
-
-        int ans, i ;
-        for( i = 0 ; i<N-3; i +=3)
+    int singleElement(int arr[] ,int n) {
+        int cnt = 1, i ;
+        sort(arr,arr+n);
+        for(i = 0 ; i<n ; i++)
         {
-            if(nums[i]!=nums[i+2])
-                break ; 
+            if(arr[i]==arr[i+1])
+            {
+                cnt++ ;
+            }
+            else
+            {
+                if(cnt>1)
+                cnt = 1 ;
+                else
+                return arr[i];
+            }
         }
-        if(i!=N-3)
-            return nums[i];
-        for(;i<N-1;i++)
-        {
-            if(nums[i]!=nums[i+1])
-                return nums[i+1];
-        }
-         return nums[i+1] ;
+        
     }
 };
 
