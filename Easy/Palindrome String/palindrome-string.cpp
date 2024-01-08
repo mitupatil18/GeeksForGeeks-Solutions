@@ -10,19 +10,11 @@ class Solution{
 public:	
 	
 	
-	int isPalindrome(string s)
+	int isPalindrome(string S)
 	{
-	    // Your code goes here
-	    int i = 0  , j = s.size()-1 ;
-	    while(i<j)
-	    {
-	        if(s[i]!=s[j])
-	        break ;
-	        i++ ;
-	        j-- ;
-	    }
-	    if(i>=j) return 1 ;
-	    return 0 ;
+	    string z = S ;
+	    reverse(z.begin(),z.end());
+	    return z==S ;
 	}
 
 };
