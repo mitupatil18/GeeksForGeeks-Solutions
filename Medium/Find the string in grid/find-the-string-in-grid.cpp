@@ -5,36 +5,41 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 public:
-	private:
-    bool dfs(int i, int j, vector<vector<char>> &grid, string &word, int k, int n, int m, int d1, int d2) {
-        k++;
-        if(k==word.size()) return true;
-        int ni=i+d1, nj=j+d2;
-        if(ni>=0 and ni<n and nj>=0 and nj<m and grid[ni][nj]==word[k]) return dfs(ni,nj,grid,word,k,n,m,d1,d2);
+    bool fun(vector<vector<char>> &grid, vector<int>& a,vector<int>& b,int i , int j, string word,int ind, int l)
+    {
+        if(ind>=word.size())
+        return true;
+        if(i>=grid.size() || i<0 || j>=grid[0].size() || j<0)
+        return false;
+        if(grid[i][j]==word[ind])
+        return fun(grid,a,b,i+a[l],j+b[l],word,ind+1,l);
         return false;
     }
-    
-public:
-    vector<vector<int>>searchWord(vector<vector<char>>grid, string word){
-        // Code here
-        vector<vector<int>> res;
-        int n=grid.size(), m=grid[0].size(), o=word.size()-1;
-        int dx[] = {-1,-1,1,1,0,0,-1,1};
-        int dy[] = {-1,1,1,-1,-1,1,0,0};
-        for(int i=0; i<n; i++) {
-            for(int j=0; j<m; j++) {
-                if(grid[i][j]==word[0]) {
-                    for(int it=0; it<8; it++) {
-                        if(dfs(i,j,grid,word,0,n,m,dx[it],dy[it])) {
-                            res.push_back({i,j});
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return res;
-    }
+	vector<vector<int>>searchWord(vector<vector<char>>g, string word){
+	    int n = g.size(), m = g[0].size();
+	    vector<int>a = {-1,-1,0,1,1,1,0,-1};
+	    vector<int>b = {0,1,1,1,0,-1,-1,-1};
+	    int ind = 0 ;
+	    vector<vector<int>> ans ;
+	    for(int i = 0 ; i<n ;i++)
+	    {
+	        for(int j = 0  ; j<m ;j++)
+	        {
+	            if(g[i][j]==word[0])
+	            {
+	                for(int l = 0 ; l<8 ;l++)
+	                {
+	                    if(fun(g,a,b,i+a[l],j+b[l],word,ind+1,l))
+	                    {
+	                        ans.push_back({i,j});
+	                        break;
+	                    }
+	                }
+	            }
+	        }
+	    }
+	    return ans;
+	}
 };
 
 //{ Driver Code Starts.
