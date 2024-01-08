@@ -16,28 +16,15 @@ int main()
 // Contributed By: Pranay Bansal
 // } Driver Code Ends
 
+
 int countRev (string s)
 {
-    if(s.size()%2==1)
-    return -1 ;
-    stack<char> st ;
-    int c = 0 ;
-    for(auto e:s)
-    {
-        if(e=='{')
-        st.push(e);
-        else
-        {
-            if(st.empty())
-            {
-                c++ ;
-                st.push('{');
-            }
-            else
-            {
-                st.pop();
-            }
-        }
+    if(s.size()&1)return -1;
+    int ans=0,o=0,c=0;
+    for(char ch:s){
+        ch=='{'?o++:c++;
+        if(c>o)ans++,o++,c--;
     }
-    return c+(st.size()/2) ;
+    return ans+(o-c)/2;
+    
 }
