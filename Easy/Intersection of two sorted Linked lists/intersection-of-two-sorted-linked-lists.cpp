@@ -66,32 +66,32 @@ class Solution
     public:
     Node* findIntersection(Node* head1, Node* head2)
     {
-        Node *a = head1 , *b = head2;
+        Node *a = head1 , *b = head2 ;
         vector<int> v ;
         while(a && b)
         {
             if(a->data==b->data)
             {
                 v.push_back(a->data);
-                a = a->next ;
+                a = a ->next ;
                 b = b->next ;
             }
-            else if(a->data <b->data)
-            a = a->next ;
+            else if(a->data<b->data)
+            a = a ->next ;
             else
             b = b->next ;
         }
-        Node *head = NULL, *prev = NULL ;
-        for(int i = 0 ; i<v.size() ; i++)
+        Node *z = NULL , *prev = NULL ;
+        for(int i = 0 ; i<v.size();i++)
         {
-            Node *a = new Node(v[i]);
-            if(head==NULL)
-            head = a ;
+            Node *x = new Node(v[i]);
+            if(z==NULL)
+            z = prev = x ;
             else
-            prev->next = a ;
-            prev = a ;
+            prev->next = x ;
+            prev = x ;
         }
-        return head ;
+        return z;
     }
 };
 
