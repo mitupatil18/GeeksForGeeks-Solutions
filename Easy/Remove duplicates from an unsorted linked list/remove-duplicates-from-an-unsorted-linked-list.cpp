@@ -40,27 +40,29 @@ struct Node {
 class Solution
 {
     public:
-    void deletenode(Node* node){
-        if(!node->next->next)node->next=NULL;
-        else node->next=node->next->next;
-    }
+    //Function to remove duplicates from unsorted linked list.
     Node * removeDuplicates( Node *head) 
-    {   auto ans=head;
-        set<int>s;
-        int flag=1;
-        Node* prev=NULL;
-        while(head){
-            
-            if(s.find(head->data)==s.end()){
-                s.insert(head->data);
-                prev=head;
-                head=prev->next;
-            }
+    {
+        set<int> s ;
+        vector<Node*> v ;
+        Node *a = head ;
+        int i;
+        while(a)
+        {
+            if(s.find(a->data)!=s.end());
             else
-            deletenode(prev);
-            head=prev->next;
+            {
+                v.push_back(a);
+                s.insert(a->data);
+            }
+            a = a->next ;
         }
-        return ans ;
+        for(i = 0 ; i<v.size()-1;i++)
+        {
+            v[i]->next = v[i+1];
+        }
+        v[i]->next = NULL;
+        return head ;
     }
 };
 
