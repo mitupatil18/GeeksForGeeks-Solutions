@@ -19,10 +19,7 @@ class Solution{
            continue;
            int mn = i-g[i];
            int mx = i+g[i];
-           if(mn<0)
-           mn = 0 ;
-           if(mx>n)
-           mx = n ;
+           
            v.push_back({max(0,mn),min(n-1,mx)});
        }
        sort(v.begin(),v.end());
