@@ -103,21 +103,23 @@ class Solution
     public:
     Node* reverseDLL(Node * head)
     {
-        stack<int> s;
-        Node *a = head ;
-        while(a)
+          Node *temp = head;
+        Node *t = NULL;
+        
+        if(temp->next == NULL)
         {
-            s.push(a->data);
-            a = a->next ;
+            return head;
         }
-        a = head ;
-        while(!s.empty())
+    
+        while(temp!=NULL)
         {
-            a->data = s.top() ;
-            s.pop();
-            a = a->next ;
+            t = temp->prev;
+            temp->prev = temp->next;
+            temp->next = t;
+            temp = temp->prev;
         }
-        return head ;
+        head = t->prev;
+        return head;
     }
 };
 
