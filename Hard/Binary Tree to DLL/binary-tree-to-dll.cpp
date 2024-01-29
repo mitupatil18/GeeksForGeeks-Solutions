@@ -115,34 +115,32 @@ class Solution
 {
     public: 
     //Function to convert binary tree to doubly linked list and return it.
-    void find(Node *a, vector<Node*>& v)
+    void solve(Node *a , vector<Node*>& v)
     {
-        if(a==NULL)return ;
-        find(a->left,v);
+        if(a==NULL)
+        return ;
+        solve(a->left,v);
         v.push_back(a);
-        find(a->right,v);
+        solve(a->right,v);
     }
     Node * bToDLL(Node *root)
     {
-        vector<Node*>  v ;
-        find(root,v);
-        int i;
-        if(v.size()==1)
+        vector<Node*> v ;
+        solve(root,v);
+        int i ;
+        for(i= 0 ; i<v.size();i++)
         {
-            v[0]->left = v[0]->right = NULL ;
-            return v[0] ;
+            if(i==0)
+            {
+                v[i]->left = NULL ;
+            }
+            else
+            v[i]->left= v[i-1];
+            if(i!=v.size()-1)
+            v[i]->right= v[i+1];
         }
-        Node * ans = v[0] ;
-        v[0]->left = NULL ;
-        v[0]->right = v[1] ;
-        for(i = 1 ; i<v.size()-1 ; i++)
-        {
-            v[i]->right = v[i+1] ;
-            v[i]->left = v[i-1] ;
-        }
-        v[i]->left = v[i-1] ;
-        v[i]->right = NULL ;
-        return ans ;
+        v[i-1]->right = NULL;
+        return v[0];
     }
 };
 
