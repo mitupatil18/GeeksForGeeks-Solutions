@@ -125,22 +125,22 @@ struct Node
 class Solution
 {
 public:
-    void find(Node *a, vector<Node*>& v)
+    void find(Node *root , vector<Node*>& v)
     {
-        if(a==NULL)
-        return;
-        find(a->left,v);
-        v.push_back(a);
-        find(a->right,v);
+        if(root==NULL)
+        return ;
+        find(root->left,v);
+        v.push_back(root);
+        find(root->right,v);
     }
     void populateNext(Node *root)
     {
-        vector<Node*> v;
+        vector<Node*> v ;
+        int i  ;
         find(root,v);
-        for(int i = 0 ; i<v.size()-1 ; i++)
-        {
-            v[i]->next = v[i+1] ;
-        }
+        for(i = 0 ; i<v.size()-1;i++)
+        v[i]->next = v[i+1];
+        v[i]->next = NULL ;
     }
 };
 
