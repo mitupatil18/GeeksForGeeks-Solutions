@@ -122,24 +122,24 @@ struct Node {
 */
 // your task is to complete the Function
 // Function should return median of the BST
-void find(Node *a , vector<int>& v)
+void find(Node *a, vector<int>& v)
 {
-    if(a==NULL) return ;
+    if(a==NULL)
+    return ;
     find(a->left,v);
     v.push_back(a->data);
     find(a->right,v);
 }
 float findMedian(struct Node *root)
 {
-      //Code here
-      vector<int> v ;
-      find(root,v);
-      int n = v.size() ;
-      float ans;
-      if(n%2==0)
-      ans = (float) (v[(n/2)]+v[(n/2)-1])/2 ;
-      else
-      ans = (float) v[n/2];
-      return ans ;
+    vector<int> v ;
+    find(root,v);
+    float ans;
+    int m= v.size()/2 ;
+    if(v.size()%2==0)
+    ans = (float) (v[m]+v[m-1])/2 ;
+    else
+    ans = v[m];
+    return ans ;
 }
 
