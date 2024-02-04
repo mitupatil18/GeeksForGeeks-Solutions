@@ -145,22 +145,24 @@ Node* newNode( int data )
 
 class Solution{
 public:
-    int i=0;
-    Node *CreateTree(int pre[], int size, int max)
+    //Function that constructs BST from its preorder traversal.
+    Node* build(Node* root, int data)
     {
-        if(i == size || pre[i] > max)
-        return NULL;
-        
-        Node * root = newNode(pre[i++]);
-        
-        root->left = CreateTree(pre,size,root->data);
-        root->right = CreateTree(pre,size,max);
-        
+       if(root==NULL)
+       return newNode(data);
+       else if(data>root->data)
+       root->right= build(root->right,data);
+       else
+       root->left= build(root->left,data);
         return root;
     }
     Node* post_order(int pre[], int size)
     {
-        CreateTree(pre,size,INT_MAX);
+        
+        Node *root = NULL;
+        for(int i =0 ; i<size;i++)
+        root = build(root,pre[i]);
+        return root;
     }
 };
 
