@@ -17,19 +17,19 @@ class Solution
         {
             if(x[i]=='(' || x[i]=='{' || x[i]=='[')
             s.push(x[i]);
-            else if(!s.empty())
+            else if(s.empty())
+            return 0 ;
+            else
             {
-                if(x[i]=='}' && s.top()=='{' && !s.empty())
+                if(x[i]==')' && s.top()=='(')
                 s.pop();
-                else if(x[i]==')' && s.top()=='(' && !s.empty())
-                s.pop();
-                else if(x[i]==']' && s.top()=='[' && !s.empty())
+                else if(x[i]=='}' && s.top()=='{')
+                s.pop(); 
+                else if(x[i]==']' && s.top()=='[')
                 s.pop();
                 else
-                return false;
+                return 0 ;
             }
-            else
-            return false;
             i++ ;
         }
         return s.empty()?true:false;
