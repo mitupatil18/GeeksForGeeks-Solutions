@@ -97,28 +97,33 @@ class Solution{
     public:
     /* Should return minimum distance between a and b
     in a tree with given root*/
-    int ans = 0 ;
-    int find(Node *rt , int a , int b)
+    Node *lca(Node *root,int a, int b)
     {
-        if(rt==NULL)
-        return 0;
-        int l = find(rt->left,a ,b);
-        int r = find(rt->right,a ,b);
-        if(rt->data == a || rt->data == b){
-            if(l || r)  
-            ans = max(l , r);
-            else  
-            return 1;
-        }
-        else if(l && r) 
-        ans = l+r;
-        else if(l || r) 
-        return max(l , r)+1;
-        return 0;
+        if(!root) return NULL ;
+        if(root->data==a || root->data==b ) return root ;
+        Node* l = lca(root->left,a,b);
+        Node* r = lca(root->right,a,b);
+        if(l!=NULL && r!=NULL)
+        return root;
+        else if(l!=NULL)
+        return l ;
+        else if(r!=NULL)
+        return r ;
+        return NULL;
+    }
+    int height(Node *a , int x)
+    {
+        if(a==NULL)
+        return 1e9 ;
+        if(a->data==x)
+        return 0 ;
+        return 1+min(height(a->left,x), height(a->right,x));
     }
     int findDist(Node* root, int a, int b) {
-        find(root , a , b);
-        return ans;
+        Node *anc = lca(root,a,b);
+        int h1  = height(anc,a);
+        int h2  = height(anc,b);
+        return h1+h2 ;
     }
 };
 
