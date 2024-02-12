@@ -14,19 +14,19 @@ class Solution{
     vector<int> help_classmate(vector<int> arr, int n) 
     { 
         stack<int> s;
-        s.push(-1);
-        vector<int> ans(n,0) ;
-        for(int i = n-1 ; i>=0 ; i--)
+         vector<int> v;
+        for(int i = n-1; i>=0;i--)
         {
-            int curr = arr[i];
-            while(s.top()>=curr)
-            {
-                s.pop();
-            }
-            ans[i]= s.top();
-            s.push(curr);
+            while(!s.empty() && arr[i]<=s.top())
+            s.pop();
+            if(!s.empty())
+            v.push_back(s.top());
+            else
+            v.push_back(-1);
+            s.push(arr[i]);
         }
-        return ans;
+        reverse(v.begin(),v.end());
+        return v ;
     } 
 };
 
