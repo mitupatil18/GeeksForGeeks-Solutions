@@ -15,25 +15,19 @@ class Solution
 {
 public:
     int wordBreak(string A, vector<string> &B) {
-        int i = 0;
-        int j = 0;
-        int k = 0;
-        while(i<A.size())
-        {
-            j=i;
-            while(j<A.size())
-            { 
-                if (find(B.begin(), B.end(),A.substr(i,j-i+1))!=B.end())
-               {
-                     k = max(k,j+1);
+        unordered_set<string> dictionary(B.begin(), B.end());
+        vector<bool> dp(A.size() + 1, false);
+        dp[0] = true; // Empty string is always considered breakable
+        
+        for (int i = 1; i <= A.size(); ++i) {
+            for (int j = 0; j < i; ++j) {
+                if (dp[j] && dictionary.find(A.substr(j, i - j)) != dictionary.end()) {
+                    dp[i] = true;
+                    break;
                 }
-                j++;
             }
-            if(k==A.size()) return 1;           
-            if(k<=i)return 0;
-        i ++;
         }
-       return 0;
+        return dp[A.size()] ? 1 : 0;
     }
 };
 
