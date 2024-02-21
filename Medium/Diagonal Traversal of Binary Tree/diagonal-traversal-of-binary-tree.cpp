@@ -121,30 +121,28 @@ struct Node
     Node* left, * right;
 }; */
 
-void solve(Node* &root,int hd , map<int,vector<int>>& mp)
+void solve(Node *a, map<int,vector<Node*>>& m , int l)
 {
-    if(root==NULL)
-    return ;
-    mp[hd].push_back(root->data);
-    solve(root->left, hd+1, mp);
-    solve(root->right, hd, mp);
-    return ;
+    if(a==NULL)
+    return  ;
+    m[l].push_back(a);
+    solve(a->left, m,l+1);
+    solve(a->right,m,l);
     
 }
 vector<int> diagonal(Node *root)
 {
-   vector<int> ans ;
+    vector<int> v;
    if(root==NULL)
-   return ans ;
-   map<int,vector<int>> m ;
-   int hd = 0 ;
-   solve(root,hd,m);
-   for(auto it : m)
+   return v;
+   map<int,vector<Node*>> m ;
+   solve(root,m,0);
+   for(auto & x: m)
    {
-       for(auto j : it.second)
+       for(auto z : x.second)
        {
-           ans.push_back(j);
+           v.push_back(z->data);
        }
    }
-   return ans;
+   return v ;
 }
