@@ -8,23 +8,28 @@ using namespace std;
 //User function Template for C++
 class Solution{
     public:
-    void travel(vector<vector<string>> &list, vector<vector<string>> &ans, int i, vector<string> curr)
-    { 
-        if( i == list.size() ){
-            ans.push_back(curr) ;
-            return ;
-        }   
-        for(auto it : list[i]){
-            curr.push_back(it);
-            travel(list,ans,i+1,curr);
-            curr.pop_back();
+    vector<vector<string>> v ;
+    void find(int i,vector<vector<string>>&list , int n , string s)
+    {
+        if(i>n-1)
+        {
+            vector<string>  out;
+            out.push_back(s);
+            v.push_back(out);
+            return;
+        }
+        for(auto val : list[i])
+        {
+            if(i==n-1)
+            find(i+1,list,n,s+val);
+            else
+            find(i+1,list,n,s+val+" ");
         }
     }
-    vector<vector<string>> sentences(vector<vector<string>>&list)
-    {
-        vector<vector<string>> ans;
-        travel(list, ans, 0, {});
-        return ans;
+    vector<vector<string>> sentences(vector<vector<string>>&list){
+        int n = list.size();
+        find(0,list,n,"");
+        return v;
     }
 };
 
