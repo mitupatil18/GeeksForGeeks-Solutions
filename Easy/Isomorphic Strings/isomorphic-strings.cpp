@@ -13,22 +13,29 @@ class Solution
 {
     public:
     //Function to check if two strings are isomorphic.
-    bool areIsomorphic(string a, string b)
+    bool areIsomorphic(string str1, string str2)
     {
-        if(a.size()!=b.size())
-        return 0 ;
-        map<char,char> mp1,mp2;
-        for(int i=0;i<a.length();i++){
-            mp1[a[i]]=b[i];
-            mp2[b[i]]=a[i];
-        }
-        for(int i=0;i<a.length();i++){
-            
-            if((mp1[a[i]]!=b[i])||(mp2[b[i]]!=a[i]))
-            return false;
-            
-        }
-        return true;
+       vector<char> v(26,'\0');
+       set<char> s;
+       if(str1.size()!=str2.size())
+       return 0;
+       for(int i = 0 ; i<str1.size();i++)
+       {
+           if(v[str1[i]-'a']=='\0')
+           {
+               v[str1[i]-'a'] = str2[i];
+               if(s.find(str2[i])==s.end())
+               s.insert(str2[i]);
+               else
+               return 0;
+           }
+           else
+           {
+               if(v[str1[i]-'a']!=str2[i])
+               return 0;
+           }
+       }
+        return 1;
     }
 };
 
