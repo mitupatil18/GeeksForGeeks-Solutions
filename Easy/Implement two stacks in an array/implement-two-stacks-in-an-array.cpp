@@ -9,51 +9,54 @@ using namespace std;
 
 class twoStacks
 {
-    int *arr;
-    int size;
-    int top1, top2;
     public:
-    
-    twoStacks(int n=100)
+    int arr[200];
+    int f1 = 0 , f2 = 100 ;
+    int c ;
+    twoStacks()
     {
-        size = n; 
-        arr = new int[n]; 
-        top1 = -1; 
-        top2 = size;
+       for(int i = 0 ; i<200;i++)
+       arr[i] = -1;
     }
  
     //Function to push an integer into the stack1.
     void push1(int x)
     {
-        if(top1==size || top1>=top2)
+        if(f1>99)
         return ;
-        arr[++top1] = x ;
+        arr[f1] = x ;
+        f1++;
     }
     
     //Function to push an integer into the stack2.
     void push2(int x)
     {
-       if(top2<0 || top1>=top2)
+       if(f2>199)
         return ;
-        arr[--top2] = x ;
+        arr[f2] = x ;
+        f2++;
     }
     
     //Function to remove an element from top of the stack1.
     int pop1()
     {
-        if(top1==-1) return -1;
-        int ans = arr[top1];
-        top1--;
-        return ans ;
+        if(f1<=0)
+        return -1;
+        f1--;
+        int x = arr[f1];
+        arr[f1] = -1;
+        return x;
     }
     
     //Function to remove an element from top of the stack2.
     int pop2()
     {
-       if(top2==size) return -1;
-        int ans = arr[top2];
-        top2++;
-        return ans ;
+       if(f2<=0)
+        return -1;
+        f2--;
+        int x = arr[f2];
+        arr[f2] = -1;
+        return x ;
     }
 };
 
