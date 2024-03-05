@@ -9,30 +9,27 @@ class Solution
 {
     public:
     //Function to check if brackets are balanced or not.
-    bool ispar(string x)
+    bool ispar(string s)
     {
-        stack<int> s;
-        int i = 0 ;
-        while(i<x.size())
+        stack<char> st;
+        int i  = 0 ;
+        for(i = 0 ; i<s.length() ; i++)
         {
-            if(x[i]=='(' || x[i]=='{' || x[i]=='[')
-            s.push(x[i]);
-            else if(s.empty())
-            return 0 ;
+            if(s[i]=='(' || s[i]=='{' || s[i]=='[')
+            st.push(s[i]);
             else
             {
-                if(x[i]==')' && s.top()=='(')
-                s.pop();
-                else if(x[i]=='}' && s.top()=='{')
-                s.pop(); 
-                else if(x[i]==']' && s.top()=='[')
-                s.pop();
+                if(!st.empty() && s[i]==')' && st.top()=='(')
+                st.pop();
+                else if(!st.empty() && s[i]=='}' && st.top()=='{')
+                st.pop();
+                else if(!st.empty() && s[i]==']' && st.top()=='[')
+                st.pop();
                 else
-                return 0 ;
+                break;
             }
-            i++ ;
         }
-        return s.empty()?true:false;
+        return st.empty() && i==s.length();
     }
 
 };
