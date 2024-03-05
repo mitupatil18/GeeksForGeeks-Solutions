@@ -4,28 +4,20 @@ using namespace std;
 
 
 // } Driver Code Ends
-
 class Solution{
     public:
-    string removeConsecutiveCharacter(string S)
+    string removeConsecutiveCharacter(string st)
     {
-        stack<char> stk;
-        int i = 0  ;
-        stk.push(S[i++]);
-        while(i<S.size())
+        string s;
+        for(int i = 0 ; i<st.size();i++)
         {
-            if(S[i]!=stk.top())
-            stk.push(S[i]);
-            i++;
+            if(st[i]==st[i+1])
+            continue;
+            else
+            s.push_back(st[i]);
         }
-        string ans = "" ;
-        while(!stk.empty())
-        {
-            ans.push_back(stk.top());
-            stk.pop();
-        }
-        reverse(ans.begin(), ans.end());
-        return ans;
+        
+        return s ;
     }
 };
 
