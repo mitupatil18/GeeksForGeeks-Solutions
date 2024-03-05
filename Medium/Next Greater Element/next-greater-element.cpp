@@ -9,19 +9,25 @@ class Solution
     public:
     //Function to find the next greater element for each element of the array.
     vector<long long> nextLargerElement(vector<long long> arr, int n){
-        stack<long long> st;
-        vector<long long> vec;
-        for(int i=n-1; i>=0; i--) {
-            while(st.size() and st.top() <= arr[i]) st.pop();
-            if(st.empty()) vec.push_back(-1);
-            else vec.push_back(st.top());
-            st.push(arr[i]);
+        vector<long long> v(n,-1);
+        stack<long long> s ;
+        int j = n-1 ;
+        while(j>=0)
+        {
+            while(!s.empty() && arr[j]>=s.top())
+            s.pop();
+            if(s.empty())
+            v[j] = -1;
+            else
+            v[j] = s.top();
+            s.push(arr[j]);
+            j--;
         }
-        reverse(vec.begin(),vec.end());
-        return vec;
+        
+        
+        return v;
     }
 };
-
 
 //{ Driver Code Starts.
 
