@@ -6,26 +6,31 @@ using namespace std;
 // User function template for C++
 class Solution{
     public:
-    int solve(string &wild, string &pattern, int i, int j, vector<vector<int>> &dp)
-    {
-        if(i < 0 && j < 0)
-            return 1;
-        if(i < 0 || j < 0)
-            return 0;
-        if(dp[i][j] != -1)
+     bool solve(const string& s, const string& p, int i, int j, vector<vector<int>>& dp) {
+        if (i < 0 && j < 0)
+            return true;
+        if (i >= 0 && j < 0)
+            return false;
+        if (i < 0 && j >= 0) {
+            for (int k = 0; k <= j; k++) {
+                if (p[k] != '*')
+                    return false;
+            }
+            return true;
+        }
+        if (dp[i][j] != -1)
             return dp[i][j];
-        if(wild[i] == pattern[j])
-            return dp[i][j] = solve(wild, pattern, i - 1, j - 1, dp);
-        if(wild[i] == '?')
-            return dp[i][j] = solve(wild, pattern, i - 1, j - 1, dp);
-        if(wild[i] == '*')
-            return dp[i][j] = (solve(wild, pattern, i - 1, j - 1, dp) || solve(wild, pattern, i, j - 1, dp) || solve(wild, pattern, i - 1, j, dp));
-        return dp[i][j] = 0;
+        if (s[i] == p[j] || p[j] == '?')
+            return dp[i][j] = solve(s, p, i - 1, j - 1, dp);
+        else if (p[j] == '*')
+            return dp[i][j] = (solve(s, p, i - 1, j, dp) || solve(s, p, i, j - 1, dp));
+        else
+            return false;
     }
-    bool match(string wild, string pattern)
+    bool match(string p, string s)
     {
-        vector<vector<int>> dp(wild.size(), vector<int>(pattern.size(), -1));
-        return solve(wild, pattern, wild.size() - 1, pattern.size() - 1, dp);
+        vector<vector<int>> dp(s.size(), vector<int>(p.size(), -1));
+        return solve(s, p, s.size() - 1, p.size() - 1, dp);
     }
 };
 
