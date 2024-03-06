@@ -10,18 +10,20 @@ using namespace std;
 
 class Solution{
   public:
-    vector<vector<string> > Anagrams(vector<string>& sl) {
-        //code here
-         unordered_map<string,vector<string>> um;
-        for(int i=0;i<sl.size();i++){
-            string t = sl[i];
-            sort(t.begin(),t.end());
-            um[t].push_back(sl[i]);
+    vector<vector<string> > Anagrams(vector<string>& string_list) {
+        vector<vector<string>> v;
+        map<string ,vector<string>> m ;
+        for(int i = 0  ; i<string_list.size() ;i++)
+        {
+            string z = string_list[i] ;
+            sort(z.begin(),z.end());
+            m[z].push_back(string_list[i]);
         }
-        vector<vector<string>> ans;
-        for(auto i:um) ans.push_back(i.second);
-        sort(ans.begin(),ans.end());
-        return ans;
+        for(auto x : m)
+        {
+            v.push_back(x.second);
+        }
+        return v;
     }
 };
 
