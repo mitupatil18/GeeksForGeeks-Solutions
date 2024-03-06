@@ -5,24 +5,26 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
 	public:
-	     void find(string t,  const string s ,int index , vector<string>& ans)
-	     {
-	         if(index==s.length())
-	         {
-	             if(!t.empty()) ans.push_back(t);
-	             return ;
-	         }
-	         find(t+s[index] ,s, index+1, ans);
-	         find(t,s, index+1, ans);
-	     }
+		    vector<string> v ;
+	    void find(string & s , int i , const string& temp)
+	    {
+	        
+	        if(i>=s.size())
+	        {
+	            if(temp.size()>0)
+	            v.push_back(temp);
+	            return ;
+	        }
+	        find(s,i+1, temp+s[i]);
+	        find(s,i+1, temp);
+	    }
 		vector<string> AllPossibleStrings(string s){
-		    vector<string> ans ;
-		    find("" ,s , 0, ans);
-		    sort(ans.begin(), ans.end());
-		    return ans ;
+		    string temp = "" ;
+		    find(s,0, temp);
+		    sort(v.begin(),v.end());
+		    return v ;
 		}
 };
-
 
 //{ Driver Code Starts.
 int main(){
