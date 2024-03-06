@@ -10,12 +10,21 @@ class Solution
         vector <int> search(string pat, string txt)
         {
             vector <int> v;
-            int j = 0 ;
-            while(txt.find(pat,j)!=string::npos)
+            int n = pat.size() , m = txt.size();
+            for(int i = 0 ; i<m-n+1 ;i++)
             {
-                int i = txt.find(pat,j);
-                v.push_back(i+1);
-                j = i+1 ;
+                
+                if(pat[0]==txt[i] && pat[n-1]==txt[i+n-1])
+                {
+                    int j = 0 ;
+                    for( ; j<n ;j++)
+                    {
+                        if(pat[j]!=txt[i+j])
+                        break;
+                    }
+                    if(j>=n)
+                    v.push_back(i+1);
+                }
             }
             return v ;
         }
