@@ -13,19 +13,25 @@ class Solution{
     public:
     vector<int> help_classmate(vector<int> arr, int n) 
     { 
-        stack<int> s;
-         vector<int> v;
-        for(int i = n-1; i>=0;i--)
+        stack<int> s ;
+        vector<int> v(n,0);
+        int i = n-1;
+        while(i>=0)
         {
-            while(!s.empty() && arr[i]<=s.top())
-            s.pop();
+            while(!s.empty() && s.top()>=arr[i])
+            {
+                s.pop();
+            }
             if(!s.empty())
-            v.push_back(s.top());
+            {
+                v[i] = s.top();
+               
+            }
             else
-            v.push_back(-1);
+            v[i] = -1;
             s.push(arr[i]);
+            i--;
         }
-        reverse(v.begin(),v.end());
         return v ;
     } 
 };
