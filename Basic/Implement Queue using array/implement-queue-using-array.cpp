@@ -66,10 +66,9 @@ public :
 };
  */
 
+//Function to push an element x in a queue.
 void MyQueue :: push(int x)
 {
-    if(rear==100005)
-    return ;
     arr[rear] = x;
     rear++;
 }
@@ -77,13 +76,9 @@ void MyQueue :: push(int x)
 //Function to pop an element from queue and return that element.
 int MyQueue :: pop()
 {
-    if(rear==front)
+    if(front>=rear)
     return -1;
     int x = arr[front];
-    arr[front] = -1;
     front++;
-     if(front==rear) {
-            front=0,rear=0;
-        }
-        return x;
+    return x;
 }
