@@ -105,27 +105,29 @@ class Solution{
     public:
     //Function to check whether all nodes of a tree have the value 
     //equal to the sum of their child nodes.
-    int f = 1 ;
+    int ans = 1;
     void find(Node *a)
     {
         if(a==NULL)
         return ;
-        if(a->left==NULL && a->right==NULL)
-        return ;
-        int x = 0 ;
-        if(a->left)
-        x += a->left->data ;
-        if(a->right)
-        x += a->right->data ;
-        if(x!=a->data)
-        f = 0 ;
+        if(a->left || a->right)
+        {
+            int sum = 0 ;
+            if(a->left)
+            sum += a->left->data;
+            if(a->right)
+            sum += a->right->data;
+            if(sum!=a->data)
+            ans = 0 ;
+            
+        }
         find(a->left);
         find(a->right);
     }
     int isSumProperty(Node *root)
     {
         find(root);
-        return f ;
+        return ans;
     }
 };
 
