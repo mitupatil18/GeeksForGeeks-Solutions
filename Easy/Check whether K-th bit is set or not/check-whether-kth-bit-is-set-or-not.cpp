@@ -15,15 +15,7 @@ class Solution
     // Function to check if Kth bit is set or not.
     bool checkKthBit(int n, int k)
     {
-        int x = n ;
-        while(x>0)
-        {
-            int r = x%2 ;
-            if(k==0)
-            return r ;
-            k-- ;
-            x /= 2;
-        }
+        return (n>>k)%2!=0;
     }
 };
 
