@@ -9,42 +9,25 @@ using namespace std;
 
 class Solution{
   public:
-    int longestKSubstr(string s, int k) 
-    {
-        unordered_map <char,int> mp;
-        queue <char> q;
-        int ans = 0 ;
-        int unique_in_substring = 0;
-        
-        for(int i = 0 ;i<s.size();i++)
+    int longestKSubstr(string s, int k) {
+        map<char,int> m;
+        int i = 0 , j = 0, n = s.size(), ans = 0  ;
+        for( ; j<n ;j++)
         {
-            q.push(s[i]);
-            mp[s[i]]++;
-            
-            if(mp[s[i]] == 1)
-            unique_in_substring++;
-            
-            while(unique_in_substring > k )
+            m[s[j]]++;
+            while(m.size()>k)
             {
-                char ch = q.front();
-                mp[ch]--;
-                
-                if(mp[ch] ==0 )
-                unique_in_substring--;
-                
-                q.pop();
-                
+                m[s[i]]--;
+                if(m[s[i]]==0)
+                {
+                    m.erase(s[i]);
+                }
+                i++;
             }
-            
-            if(unique_in_substring == k and ans < q.size())
-            {
-                ans = q.size();
-            }
+            if(m.size()==k)
+            ans = max(ans,j-i+1);
         }
-        
-        if(ans == 0)return -1;
-        
-        return ans;
+        return ans==0?-1:ans;
     }
 };
 
