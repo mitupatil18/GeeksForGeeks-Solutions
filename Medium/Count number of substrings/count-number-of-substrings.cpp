@@ -11,14 +11,12 @@ using namespace std;
 class Solution
 {
   public:
-    long long int solve(string s, int k)
-    {
+    long long find(string s, int k){
         int n = s.size();
         
         long long int c = 0;
         int j = 0, sz = 0;
         vector<int>mp(26, 0);
-        
         
         for(int i=0; i<n; i++)
         {
@@ -32,16 +30,13 @@ class Solution
                 if(!mp[s[j]-'a']) sz--;
                 j++;
             }
-            
             if(j <= i) c += (i-j+1);
         }
-        
         return c;
     }
-  
     long long int substrCount (string s, int k) {
-        //code here.
-        return solve(s, k) - solve(s, k-1);
+    	
+    	return find(s,k)-find(s,k-1);
     }
 };
 
