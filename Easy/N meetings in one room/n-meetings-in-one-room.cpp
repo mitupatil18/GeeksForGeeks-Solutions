@@ -19,8 +19,9 @@ class Solution
         }
         sort(ans.begin(),ans.end());
         int an=0;
-        int last=-1;
-        for(int i=0;i<n;i++) {
+        int last = -1;
+        for(int i=0;i<n;i++) 
+        {
             if(ans[i].first>last) {
                 last=ans[i].second;
                 an++;
@@ -32,6 +33,7 @@ class Solution
         return an;
     }
 };
+
 
 //{ Driver Code Starts.
 int main() {
