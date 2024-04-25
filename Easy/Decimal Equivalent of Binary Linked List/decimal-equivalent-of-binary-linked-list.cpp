@@ -34,7 +34,7 @@ struct Node
     }
     
 }; */
-
+#include <cmath>
 class Solution
 {
     public:
@@ -53,7 +53,7 @@ class Solution
         }
         long long unsigned int decimalValue(Node *head)
         {
-            int mod = 1e9+7;
+           int mod = 1e9+7;
            long long unsigned int ans = 0 , val = 1, cnt = 0  ;
            Node *a = head ;
            a = reverse(a);
@@ -64,7 +64,6 @@ class Solution
                a= a->next ;
            }
            return ans%mod ;
-       
         }
 };
 
