@@ -61,64 +61,62 @@ class Solution
 {
     public:
     //Function to add two numbers represented by linked list.
-    struct Node* addTwoLists(struct Node* l1, struct Node* l2)
+    void reverseNode(struct Node*& head) {
+        if (head == NULL || head->next == NULL)
+            return;
+        
+        Node* prev = NULL;
+        Node* current = head;
+        Node* next;
+    
+        while (current != NULL) {
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+    
+        head = prev;
+    }
+    
+    void insertAtBeginning(struct Node*& head, int data){
+        Node* temp = new Node(data);
+        temp -> next = head;
+        head = temp;
+    }
+    
+    struct Node* addTwoLists(struct Node* num1, struct Node* num2)
     {
-        stack<int> s1 , s2, s3 ;
-        Node* a = l1 ;
-        while(a)
-        {
-            s1.push(a->data);
-            a = a->next ;
+        //Removes Unneccessary zeros
+        while(num1->data == 0 && num1->next != NULL)
+            num1 = num1->next;
+        while(num2->data == 0 && num2->next != NULL)
+            num2 = num2->next;
+        
+        reverseNode(num1);
+        reverseNode(num2);
             
+        Node* sum = NULL;
+        
+        //Carry
+        int c = 0;
+        
+        while (num1 || num2 || c){
+            //temporary sum
+            int s = c;
+            if (num1){
+                s += num1->data;
+                num1 = num1->next;
+            }
+            if (num2){
+                s += num2->data;
+                num2 = num2->next;
+            }
+            insertAtBeginning(sum, s%10);
+            c = s/10;
         }
-        a = l2 ;
-        while(a)
-        {
-            s2.push(a->data);
-            a = a->next ;  
-        }
-        int c = 0 ;
-        while(!s1.empty() && !s2.empty())
-        {
-            int x = s1.top();
-            int y =s2.top();
-            int z= (x+y+c)%10 ;
-            s3.push(z);
-            c = (x+y+c)/10 ;
-            s1.pop();
-            s2.pop();
-        }
-        while(!s1.empty())
-        {
-            int z = (s1.top()+c)%10 ;
-            c = (s1.top()+c)/10 ;
-            s3.push(z);
-            s1.pop();
-        }
-        while(!s2.empty())
-        {
-            int z = (s2.top()+c)%10 ;
-            c = (s2.top()+c)/10 ;
-            s3.push(z);
-            s2.pop();
-        }
-        if(c!=0)
-        s3.push(c);
-        Node *b = NULL , *prev = NULL ;
-        while(!s3.empty())
-        {
-            Node* t = new Node(s3.top());
-            if(prev==NULL)
-            {
-                prev =t  ;
-                b = t ;
-            }    
-            else
-                prev->next = t;  
-            prev = t ;
-            s3.pop();
-        }
-        return b ;
+           
+        return sum;
     }
 };
 
@@ -134,12 +132,12 @@ int main()
         int n, m;
         
         cin>>n;
-        Node* first = buildList(n);
+        Node* num1 = buildList(n);
         
         cin>>m;
-        Node* second = buildList(m);
+        Node* num2 = buildList(m);
         Solution ob;
-        Node* res = ob.addTwoLists(first,second);
+        Node* res = ob.addTwoLists(num1,num2);
         printList(res);
     }
     return 0;
