@@ -46,28 +46,39 @@ struct Node
 class Solution
 {
     public:
-    int find(Node *a)
+    Node* reverse(Node *head)
     {
-        if(a==NULL)
+        if(head==NULL)
+        return NULL;
+        Node *a = head , *prev = NULL, *next = NULL;
+        while(a)
         {
-            return 1;
+            next = a->next ;
+            a->next = prev ;
+            prev = a;
+            a = next;
         }
-        int c = find(a->next);
-        a->data = a->data+c ;
-        if(a->data<10)
-        return 0 ;
-        return 1;
+        return prev;
     }
     Node* addOne(Node *head) 
     {
-        int c = find(head);
-        if(c==1)
+        head = reverse(head);
+        Node *a = head, *prev = NULL;
+        int c = 1 ;
+        while(a)
         {
-            Node *newnode=new Node(1);
-            newnode->next=head;
-            head=newnode;
+            a->data = (a->data+c);
+            c = (a->data)/10;
+            a->data %= 10;
+            prev = a;
+            a = a->next;
         }
-        return head;
+        if(c!=0)
+        {
+            Node *a = new Node(c);
+            prev->next = a;
+        }
+        return reverse(head);
     }
 };
 
