@@ -35,19 +35,16 @@ class Solution
 public:
     vector<pair<int, int>> findPairsWithGivenSum(Node *head, int target)
     {
-        vector<pair<int, int>> v ;
-        map<int,int> m;
-        Node *a = head ;
-        int sum = 0 , ans =  0  ;
+        map<int,int> m ;
+        vector<pair<int, int>> v;
+        Node *a = head;
         while(a)
         {
-            int dif = target-a->data;
-            if (m.find(dif) != m.end()) {
-                v.push_back({dif, a->data});
+            if(m.find(target-a->data)!=m.end())
+            {
+                v.push_back({target-a->data,a->data});
             }
-            
-                m[a->data]++;
-            
+            m[a->data]++ ;
             a = a->next;
         }
         sort(v.begin(),v.end());
