@@ -35,18 +35,37 @@ struct Node {
 class Solution
 {
     public:
-    Node* insert(Node* root, int key) {
-        if(root==NULL) 
-        {
-            Node *rt = new Node(key);
-            return rt ;
-        }
-        if(root->data==key) return root;
-        if(key > root->data)
-        root->right = insert(root->right,key);
-        else
-        root->left = insert(root->left,key);
-        return root ;
+        Node* insert(Node* a, int data) {
+        
+            if(a==NULL)
+            return new Node(data);
+            auto curr = a;
+            while(1)
+            {
+                if(curr->data<data)
+                {
+                    if(curr->right)
+                    curr = curr->right;
+                    else
+                    {
+                        curr->right = new Node(data);
+                        break;
+                    }
+                }
+                else if (data < curr->data) 
+                {
+                    if(curr->left)
+                    curr = curr->left;
+                    else
+                    {
+                        curr->left = new Node(data);
+                        break;
+                    }
+                }
+                else
+                break;
+            }
+            return a;
     }
 
 };
