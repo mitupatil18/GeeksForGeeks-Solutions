@@ -21,26 +21,22 @@ struct Node {
 class Solution{
 
 public:
-    void find(Node *a , int& dif , int x , int& ans)
+    void find(Node *a , int& ans, int & dif , int x)
     {
         if(a==NULL)
         return ;
-        if(a->data<=x)
+        find(a->left,ans, dif,x);
+        if(a->data<=x && x-a->data<=dif)
         {
-            int z = x-a->data;
-            if(dif>z)
-            {
-                dif = z ;
-                ans = a->data ;
-            }
+            dif = x-a->data;
+            ans = a->data;
         }
-        find(a->left, dif,x,ans);
-        find(a->right, dif,x,ans);
+         find(a->right,ans, dif,x);
     }
     int floor(Node* root, int x) {
-        int dif = INT_MAX , ans = -1 ;
-        find(root,dif,x,ans);
-        return ans ;
+        int ans = 0 , dif = INT_MAX;
+        find(root,ans,dif,x);
+        return dif==INT_MAX?-1:ans;
     }
 };
 
