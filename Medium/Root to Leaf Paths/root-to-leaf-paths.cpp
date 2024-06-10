@@ -144,25 +144,26 @@ struct Node
 
 class Solution {
   public:
-   void traverse(Node *a, vector<int> s, vector<vector<int>>& v)
+    void find(Node *a , vector<vector<int>>& ans, vector<int>& v)
     {
-        if(a==NULL)
-        return;
-        s.push_back(a->data);
+        if(a==NULL) return ;
+        v.push_back(a->data);
         if(a->left==NULL && a->right==NULL)
         {
-            v.push_back(s);
-            return ;
+            ans.push_back(v);
+            v.pop_back();
+            return;
         }
-       traverse(a->left,s,v);
-        traverse(a->right,s,v);
-        
+        find(a->left,ans,v);
+        find(a->right,ans,v);
+        v.pop_back();
+        return ;
     }
     vector<vector<int>> Paths(Node* root) {
-        vector<vector<int>> v;
-        vector<int> s;
-        traverse(root,s,v);
-        return v;
+        vector<vector<int>> ans;
+        vector<int> v;
+        find(root,ans,v);
+        return ans;
     }
 };
 
