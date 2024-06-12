@@ -8,27 +8,55 @@ using namespace std;
 // User function Template for C++
 class Solution {
   public:
+    void toposort(int i , vector<pair<int,int>> adj[], vector<int>& vis, stack<int> & st )
+    {
+        if(vis[i]==1) return ;
+        vis[i] = 1;
+        for(auto x : adj[i])
+        {
+            if(!vis[x.first])
+            toposort(x.first, adj, vis, st);
+        }
+        st.push(i);
+    }
      vector<int> shortestPath(int N,int M, vector<vector<int>>& edges){
-        vector<pair<int, int>> adjacencyList[N];
-        for(vector<int> v:edges) {
-            adjacencyList[v[0]].push_back({v[1], v[2]});
+        vector<pair<int,int>> adj[N];
+        for(int i = 0 ; i<M; i++)
+        {
+            int u = edges[i][0];
+            int v = edges[i][1]; 
+            int wt = edges[i][2];
+            adj[u].push_back({v,wt});
         }
-        vector<int> ans(N, -1);
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-        pq.push({0, 0});
-        while(!pq.empty()) {
-            int distFrom_vertex_0=pq.top().first;
-            int node=pq.top().second;
-            pq.pop();
-            if(ans[node]!=-1 && ans[node]<distFrom_vertex_0) {
-                continue;
-            }
-            ans[node]=distFrom_vertex_0;
-            for(pair<int, int> p:adjacencyList[node]) {
-                pq.push({(distFrom_vertex_0+p.second), p.first});
+        vector<int> vis(N,0);
+        stack<int> st;
+        for(int i= 0 ;i<N ; i++)
+        {
+            if(!vis[i])
+            toposort(i, adj, vis, st);
+        }
+        
+        vector<int> dist(N);
+        for(int i = 0 ; i<N ; i++)
+        dist[i] = 1e9;
+        dist[0] = 0 ;
+        while(!st.empty())
+        {
+            int node= st.top();
+            st.pop();
+            for(auto it : adj[node])
+            {
+                int v = it.first , wt = it.second;
+                if(dist[node]+wt<dist[v])
+                dist[v] = dist[node]+wt;
             }
         }
-        return ans;
+        for(int i = 0 ; i<dist.size(); i++)
+        {
+            if(dist[i]==1e9)
+            dist[i] = -1;
+        }
+        return dist;
     }
 };
 
