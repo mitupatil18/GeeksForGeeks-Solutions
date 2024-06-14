@@ -6,22 +6,20 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    int find(vector<int>& dp, vector<int>& h, int n) {
-    if (n == 1)
-        return 0; 
-    if (dp[n] != -1)
+    int find(vector<int>& dp, vector<int>& h, int n)
+    {
+        if(n==1)
+        return 0;
+        if(dp[n]!=-1)
         return dp[n];
-    
-    int oneStep = find(dp, h, n - 1) + abs(h[n - 1] - h[n - 2]);
-    int twoStep = (n > 2) ? find(dp, h, n - 2) + abs(h[n - 1] - h[n - 3]) : INT_MAX;
-    
-    return dp[n] = min(oneStep, twoStep);
-}
-
-int minimumEnergy(vector<int>& h, int n) {
-    vector<int> dp(n + 1, -1);
-    return find(dp, h, n);
-}
+        int one = find(dp,h,n-1)+abs(h[n-1]-h[n-2]);
+        int sec = (n>2)? find(dp,h,n-2)+abs(h[n-1]-h[n-3]):INT_MAX;
+        return dp[n] = min(one,sec);
+    }
+    int minimumEnergy(vector<int>& h, int n) {
+        vector<int> dp(n+1,-1);
+        return find(dp,h,n);
+    }
 };
 
 //{ Driver Code Starts.
