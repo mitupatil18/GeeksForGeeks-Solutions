@@ -6,28 +6,27 @@ using namespace std;
 
 // } Driver Code Ends
 //User function template for C++
-
+ 
+ 
 class Solution{
   public:
     int longestKSubstr(string s, int k) {
+        int i = 0 , j = 0 , n = s.size(), ans = -1 ;
         map<char,int> m;
-        int i = 0 , j = 0, n = s.size(), ans = 0  ;
-        for( ; j<n ;j++)
+        for(int i = 0 ; i<n;i++)
         {
-            m[s[j]]++;
-            while(m.size()>k)
+            m[s[i]]++;
+            while(m.size()>k && j<=i)
             {
-                m[s[i]]--;
-                if(m[s[i]]==0)
-                {
-                    m.erase(s[i]);
-                }
-                i++;
+                m[s[j]]--;
+                if(m[s[j]]==0)
+                m.erase(s[j]);
+                j++;
             }
             if(m.size()==k)
-            ans = max(ans,j-i+1);
+            ans = max(ans,i-j+1);
         }
-        return ans==0?-1:ans;
+        return ans;
     }
 };
 
