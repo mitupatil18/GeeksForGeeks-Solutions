@@ -1,5 +1,5 @@
 //{ Driver Code Starts
-//Initial Template for C++
+// Initial Template for C++
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -8,14 +8,13 @@ using namespace std;
 // } Driver Code Ends
 /*You are required to complete this function*/
 
-class Solution{
-    public:
-    int maxLen(vector<int>&arr, int n)
-    {   
+class Solution {
+  public:
+    int maxLen(vector<int>& arr, int n) {
         map<int,int> m;
-        int sum = 0, ans = 0  ;
-        m[sum] = -1;
-        for(int i = 0 ; i<n;i++)
+        int sum = 0 , ans = 0 ,i;
+        m[0] = -1 ;
+        for(i = 0 ; i<n;i++)
         {
             sum += arr[i];
             if(m.find(sum)!=m.end())
@@ -30,24 +29,20 @@ class Solution{
 
 //{ Driver Code Starts.
 
-int main()
-{
+int main() {
     int t;
-    cin>>t;
-    while(t--)
-    {
+    cin >> t;
+    while (t--) {
         int m;
-        cin>>m;
+        cin >> m;
         vector<int> array1(m);
-        for (int i = 0; i < m; ++i){
-            cin>>array1[i];
+        for (int i = 0; i < m; ++i) {
+            cin >> array1[i];
         }
         Solution ob;
-        cout<<ob.maxLen(array1,m)<<endl;
+        cout << ob.maxLen(array1, m) << endl;
     }
-    return 0; 
+    return 0;
 }
-
-
 
 // } Driver Code Ends
