@@ -12,9 +12,9 @@ class Solution {
   public:
     int maxLen(vector<int>& arr, int n) {
         map<int,int> m;
-        int sum = 0 , ans = 0 ,i;
-        m[0] = -1 ;
-        for(i = 0 ; i<n;i++)
+        int sum = 0 , ans = 0 ;
+        m[0] = -1;
+        for(int i = 0 ; i<n;i++)
         {
             sum += arr[i];
             if(m.find(sum)!=m.end())
